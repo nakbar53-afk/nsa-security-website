@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const statValues = document.querySelectorAll('.hero-stat-value');
   const animateValue = (el) => {
     const text = el.textContent.trim();
-    // Only animate numeric values
-    if (/^\d+/.test(text)) {
-      const suffix = text.replace(/[\d,]/g, '');
+    // Only animate pure numeric values (like "100%"), skip mixed text like "24/7" or "WA"
+    if (/^\d+%?$/.test(text)) {
+      const suffix = text.replace(/[\d]/g, '');
       const target = parseInt(text.replace(/[^\d]/g, ''));
       let current = 0;
       const duration = 1500;

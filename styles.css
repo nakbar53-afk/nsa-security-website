@@ -110,11 +110,11 @@ body {
   display: flex; align-items: center; justify-content: space-between;
 }
 .nav-logo {
-  display: flex; align-items: center; gap: 12px;
+  display: flex; align-items: center; gap: 6px;
   text-decoration: none; color: var(--white);
 }
-.nav-logo img { height: 48px; width: auto; }
-.nav-logo-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+.nav-logo img { height: 56px; width: auto; }
+.nav-logo-text { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; }
 .nav-logo-sub { font-size: .65rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-400); opacity: .85; }
 
 .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
@@ -408,7 +408,7 @@ body {
   gap: 48px;
 }
 .footer-brand p { margin-top: 16px; font-size: .9rem; line-height: 1.8; }
-.footer-brand img { height: 52px; margin-bottom: 4px; }
+.footer-brand img { height: 56px; margin-bottom: 4px; }
 .footer h4 {
   color: var(--white); font-size: .95rem; font-weight: 700;
   margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;
