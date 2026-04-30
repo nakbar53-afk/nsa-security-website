@@ -1,0 +1,18 @@
+# Backup images
+assets/images/*-backup.png
+
+# Reference files
+nsa redesign/
+overhaul/
+*.pdf
+nsa official.png
+new guard.png
+black guard.png
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+trash/
