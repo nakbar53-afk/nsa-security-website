@@ -267,7 +267,7 @@ body {
 .why-section { background: var(--white); }
 .why-grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center; margin-top: 56px;
+  gap: 80px; align-items: center; margin-top: 32px;
 }
 .why-image { position: relative; border-radius: var(--radius); overflow: hidden; }
 .why-image img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
@@ -459,7 +459,7 @@ body {
   .nav-links.active { display: flex; }
   .nav-toggle { display: flex; }
   .nav-logo-text { font-size: 1.15rem; }
-  .hero { min-height: auto; padding: 80px 0 60px; }
+  .hero { min-height: auto; padding: 64px 0 48px; }
   .hero h1 { font-size: 2rem; }
   .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 24px; }
   .hero-buttons { flex-direction: column; }
