@@ -267,7 +267,7 @@ body {
 .why-section { background: var(--white); }
 .why-grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center; margin-top: 32px;
+  gap: 80px; align-items: start; margin-top: 32px;
 }
 .why-image { position: relative; border-radius: var(--radius); overflow: hidden; }
 .why-image img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
