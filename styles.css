@@ -459,7 +459,8 @@ body {
   .nav-links.active { display: flex; }
   .nav-toggle { display: flex; }
   .nav-logo-text { font-size: 1.15rem; }
-  .hero { min-height: auto; padding: 64px 0 48px; }
+  .hero { min-height: auto; padding: 0 0 48px; }
+  .hero-content { padding-top: 80px; }
   .hero h1 { font-size: 2rem; }
   .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 24px; }
   .hero-buttons { flex-direction: column; }
