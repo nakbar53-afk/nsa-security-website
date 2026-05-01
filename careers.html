@@ -247,21 +247,33 @@
     s[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
   });
 
-  // Form submit
+  // Form submit (submits to Netlify Forms)
   document.getElementById('applyForm').addEventListener('submit', e => {
     e.preventDefault();
-    const d = Object.fromEntries(new FormData(e.target).entries());
-    const subj = encodeURIComponent('Job Application — ' + d.firstName + ' ' + d.lastName);
-    const body = encodeURIComponent(
-      `Name: ${d.firstName} ${d.lastName}\nEmail: ${d.email}\nPhone: ${d.phone}\nCity: ${d.city || 'N/A'}\nPosition: ${d.position}\nExperience: ${d.experience || 'N/A'}\nLicense: ${d.license || 'N/A'}\n\n${d.message || ''}`
-    );
-    window.location.href = `mailto:info@nsasecuritygroup.com?subject=${subj}&body=${body}`;
-    const btn = e.target.querySelector('button[type="submit"]');
-    const orig = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> Application Sent';
-    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
-    btn.style.color = '#fff';
-    setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; e.target.reset(); }, 4000);
+    const formData = new FormData(e.target);
+    
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+      const btn = e.target.querySelector('button[type="submit"]');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Application Submitted!';
+      btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+      btn.style.color = '#fff';
+      e.target.reset();
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; }, 4000);
+    })
+    .catch(() => {
+      const d = Object.fromEntries(formData.entries());
+      const subj = encodeURIComponent('Job Application — ' + d.firstName + ' ' + d.lastName);
+      const body = encodeURIComponent(
+        `Name: ${d.firstName} ${d.lastName}\nEmail: ${d.email}\nPhone: ${d.phone}\nCity: ${d.city || 'N/A'}\nPosition: ${d.position}\nExperience: ${d.experience || 'N/A'}\nLicense: ${d.license || 'N/A'}\n\n${d.message || ''}`
+      );
+      window.location.href = `mailto:info@nsasecuritygroup.com?subject=${subj}&body=${body}`;
+    });
   });
 </script>
 </body>

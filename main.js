@@ -72,36 +72,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   reveals.forEach(el => observer.observe(el));
 
-  // ── Quote form handling ──
+  // ── Quote form handling (submits to Netlify Forms) ──
   const form = document.getElementById('quoteForm');
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const data = new FormData(form);
-    const values = Object.fromEntries(data.entries());
-
-    // Build mailto link as simple fallback
-    const subject = encodeURIComponent('Security Quote Request — ' + values.firstName + ' ' + values.lastName);
-    const body = encodeURIComponent(
-      `Name: ${values.firstName} ${values.lastName}\n` +
-      `Email: ${values.email}\n` +
-      `Phone: ${values.phone || 'N/A'}\n` +
-      `Service: ${values.serviceType}\n\n` +
-      `Details:\n${values.message || 'N/A'}`
-    );
-    window.location.href = `mailto:info@nsasecuritygroup.com?subject=${subject}&body=${body}`;
-
-    // Show success feedback
-    const btn = form.querySelector('button[type="submit"]');
-    const original = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> Sent — Check Your Email App';
-    btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.style.background = '';
-      btn.style.color = '';
+    const formData = new FormData(form);
+    
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+      const btn = form.querySelector('button[type="submit"]');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Quote Request Sent!';
+      btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+      btn.style.color = '#fff';
       form.reset();
-    }, 4000);
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 4000);
+    })
+    .catch(() => {
+      // Fallback to mailto if fetch fails
+      const values = Object.fromEntries(formData.entries());
+      const subject = encodeURIComponent('Security Quote Request — ' + values.firstName + ' ' + values.lastName);
+      const body = encodeURIComponent(
+        `Name: ${values.firstName} ${values.lastName}\nEmail: ${values.email}\nPhone: ${values.phone || 'N/A'}\nService: ${values.serviceType}\n\nDetails:\n${values.message || 'N/A'}`
+      );
+      window.location.href = `mailto:info@nsasecuritygroup.com?subject=${subject}&body=${body}`;
+    });
   });
 
   // ── Counter animation for hero stats ──
